@@ -1,0 +1,83 @@
+
+isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (master)
+$ echo "# EXPRESS-REST-API" >> README.md
+
+isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (master)
+$ git init
+Initialized empty Git repository in C:/Users/isit_/Documents/Coding/Codenation/W10-express-restAPI/.git/
+
+isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (master)
+$ git add README.md
+warning: LF will be replaced by CRLF in README.md.
+The file will have its original line endings in your working directory
+
+isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (master)
+$ git commit -m "first commit"
+[master (root-commit) 19ad6e9] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+
+isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (master)
+$ git branch -M main
+
+isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (main)
+$ git remote add origin https://github.com/RicLMCR/EXPRESS-REST-API.git
+
+isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (main)
+$ git push -u origin main
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 228 bytes | 228.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/RicLMCR/EXPRESS-REST-API.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+
+isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (main)
+$ touch .gitignore
+
+isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (main)
+$ npm init -y
+Wrote to C:\Users\isit_\Documents\Coding\Codenation\W10-express-restAPI\package.json:
+
+{
+  "name": "w10-express-restapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RicLMCR/EXPRESS-REST-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RicLMCR/EXPRESS-REST-API/issues"
+  },
+  "homepage": "https://github.com/RicLMCR/EXPRESS-REST-API#readme"
+}
+
+
+
+isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (main)
+$ npm i express mongoose dotenv
+
+added 86 packages, and audited 87 packages in 4s
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (main)
+$ mkdir src src/db src/user 
+
+isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (main)
+$ touch .env src/server.js src/db/connection.js 
+
+isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (main)
+$ touch src/user/model.js src/user/controllers.js src/user/routes.js
