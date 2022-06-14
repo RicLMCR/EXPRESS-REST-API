@@ -81,3 +81,5 @@ $ touch .env src/server.js src/db/connection.js
 
 isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI (main)
 $ touch src/user/model.js src/user/controllers.js src/user/routes.js
+
+$ npm i bcryptjs
