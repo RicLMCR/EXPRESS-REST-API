@@ -83,3 +83,11 @@ isit_@LAPTOP-FKOOEKKP MINGW64 ~/Documents/Coding/Codenation/W10-express-restAPI 
 $ touch src/user/model.js src/user/controllers.js src/user/routes.js
 
 $ npm i bcryptjs
+
+
+create user request
+{
+    "username": "RicLa",
+    "email": "ricl@email.com",
+    "password": "test123"
+}

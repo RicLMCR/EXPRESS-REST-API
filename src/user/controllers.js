@@ -1,5 +1,8 @@
 const User = require("./model");
 
+
+
+// create user
 exports.createUser = async (req, res) => { //Controller must include return statement and send a response (res)
     try {
         // console.log(req, res);
@@ -20,3 +23,36 @@ exports.createUser = async (req, res) => { //Controller must include return stat
         });
     }
 };
+
+// delete user
+exports.deleteUser = async (req, res) => {
+    console.log("req params", req.params);
+    try {
+        const userObj = {
+            username: req.params.username,
+        };
+        console.log("deleteUser start hit");
+        const delUser = await User.deleteOne(userObj);
+        console.log("delUser hit");
+        res.send(delUser);
+        console.log("delUser hit", delUser);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// find users
+exports.findUsers = async (req,res)=>{
+    try{
+        console.log("Find users");
+        const response = await User.find();
+        res.status(200).json({data:response});
+    } catch (error){
+        console.log(error);
+        res.send(error);
+    }
+}
+
+// exports.findUserAgain = async (req,res)=>{
+//     res.send("Find user again");
+// }
