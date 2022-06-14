@@ -42,17 +42,32 @@ exports.deleteUser = async (req, res) => {
 }
 
 // find users
-exports.findUsers = async (req,res)=>{
-    try{
-        console.log("Find users");
-        const response = await User.find();
+// exports.findUsers = async (req,res)=>{
+//     try{
+//         console.log("Find users");
+//         const response = await User.find();
+//         res.status(200).json({data:response});
+//     } catch (error){
+//         console.log(error);
+//         res.send(error);
+//     }
+// }
+
+exports.findUser = async (req, res)=>{
+    try {
+        const userObj = {
+            // username: req.params.username,
+            username: req.body.username
+        };
+        console.log("Find single user", userObj);
+        const response = await User.findOne(userObj);
         res.status(200).json({data:response});
-    } catch (error){
+    } catch (error) {
         console.log(error);
         res.send(error);
     }
 }
 
-// exports.findUserAgain = async (req,res)=>{
+// exports.findUserAgain = async (req,res)=>{ // As findUsers is also tied to GET - this command would never be run normally. We would have to add and extra "/users" onto the end of our address string in the API client
 //     res.send("Find user again");
 // }
