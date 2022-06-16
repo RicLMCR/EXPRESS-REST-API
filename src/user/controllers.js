@@ -1,6 +1,5 @@
 const User = require("./model");
-
-
+const bcrypt = require ("bcryptjs");
 
 // create user
 exports.createUser = async (req, res) => { //Controller must include return statement and send a response (res)
@@ -16,6 +15,19 @@ exports.createUser = async (req, res) => { //Controller must include return stat
         res.send({
             newUser
         }) //Sends json data
+
+        // compare password with 'test123'
+        const hash = newUser.password;
+        bcrypt.compare("test123", hash, function(err, isMatch) {
+            if (err) {
+                throw err
+              } else if (!isMatch) {
+                console.log("Password doesn't match!")
+              } else {
+                console.log("Password matches!")
+              }
+        });
+
     } catch (error) {
         console.log(error);
         res.send({
@@ -62,14 +74,15 @@ exports.findUser = async (req, res)=>{
         };
         console.log("Find single user", userObj);
         const response = await User.findOne(userObj);
+        console.log(response.username, response.password);
         res.status(200).json({data:response});
     } catch (error) {
         console.log(error);
         res.send(error);
     }
-}
+};
 
-// Update user
+// Update user V2
 exports.updateUser = async (req, res) => {
     try {
         const userObj = {
@@ -78,7 +91,7 @@ exports.updateUser = async (req, res) => {
         };
         console.log("update single user", userObj);
         let response = await User.findOneAndUpdate({
-            username: userObj.userName
+            username: userObj.username
         }, {
             $set: {
                 username: userObj.newusername,
@@ -95,7 +108,7 @@ exports.updateUser = async (req, res) => {
 }
 
 
-// Update user
+// Update user V1
 // exports.updateUser = async (req, res) => {
 //     try {
 //         const filter = {username: req.body.username};

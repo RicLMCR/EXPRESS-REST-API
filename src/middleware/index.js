@@ -8,4 +8,5 @@ exports.hashPassword = async (req,res, next)=>{ //This will go on the create use
     } catch (error) {
         console.log(error);
     }
-}
+};
+
