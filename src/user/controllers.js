@@ -70,46 +70,44 @@ exports.findUser = async (req, res)=>{
 }
 
 // Update user
-// exports.updateUser = async (req, res) => {
-//     try {
-//         const userObj = {
-//             // username: req.params.username,
-//             username: req.body.username,
-//             newusername: req.body.newusername //***
-//         };
-//         console.log("update single user", userObj);
-//         let response = await User.findOneAndUpdate({
-//             username: userObj.userName
-//         }, {
-//             $set: {
-//                 username: userObj.newusername,
-//             }
-//         }, {
-//             new: true
-//         });
-//         console.log("Succesfully updated:", userObj);
-//         response = await User.findOne(userObj);
-//         res.status(200).json({data:response});
-//     } catch (error) {
-//         console.log(error)
-//         res.send(error);
-//     }
-// }
-
-
-// Update user
 exports.updateUser = async (req, res) => {
     try {
-        const filter = {username: req.body.username};
-        const update = {username: req.body.newusername};
-
+        const userObj = {
+            username: req.body.username,
+            newusername: req.body.newusername 
+        };
         console.log("update single user", userObj);
-        const response = await User.findOneAndUpdate(filter, update, {new: true});
-
-        console.log(response);
+        let response = await User.findOneAndUpdate({
+            username: userObj.userName
+        }, {
+            $set: {
+                username: userObj.newusername,
+            }
+        }, {
+            new: true
+        });
+        response = await User.findOne({username: userObj.newusername});
         res.status(200).json({data:response});
     } catch (error) {
         console.log(error)
         res.send(error);
     }
 }
+
+
+// Update user
+// exports.updateUser = async (req, res) => {
+//     try {
+//         const filter = {username: req.body.username};
+//         const update = {username: req.body.newusername};
+
+//         console.log("update single user", userObj);
+//         const response = await User.findOneAndUpdate(filter, update, {new: true});
+
+//         console.log(response);
+//         res.status(200).json({data:response});
+//     } catch (error) {
+//         console.log(error)
+//         res.send(error);
+//     }
+// }
