@@ -1,5 +1,6 @@
 const User = require("./model");
-const bcrypt = require ("bcryptjs");
+const bcrypt = require ("bcryptjs");// for compare pw nested function
+const jwt = require ("jsonwebtoken");
 
 // create user
 exports.createUser = async (req, res) => { //Controller must include return statement and send a response (res)
@@ -12,9 +13,10 @@ exports.createUser = async (req, res) => { //Controller must include return stat
             password: req.body.password
         };
         const newUser = await User.create(userObj);
-        res.send({
-            newUser
-        }) //Sends json data
+        const token = await jwt.sign({id: newUser._id}, process.env.SECRET);// JWT: note the underscore '_id'. SECRET - is stored in .env
+        console.log(token);
+        
+        res.send({newUser, token}); //Sends json data. Note the 'token' from jwt
 
         // compare password with 'test123'
         const hash = newUser.password;
@@ -35,6 +37,9 @@ exports.createUser = async (req, res) => { //Controller must include return stat
         });
     }
 };
+
+//create a token which is sent back in the repsonse to stay signed in
+
 
 // delete user
 exports.deleteUser = async (req, res) => {
