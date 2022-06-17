@@ -20,19 +20,6 @@ exports.createUser = async (req, res) => { //Controller must include return stat
         console.log(token);
         res.send({newUser, token});
         next();
-
-        // compare password with 'test123'
-        // const hash = newUser.password;
-        // bcrypt.compare("test123", hash, function(err, isMatch) {
-        //     if (err) {
-        //         throw err
-        //       } else if (!isMatch) {
-        //         console.log("Password doesn't match!")
-        //       } else {
-        //         console.log("Password matches!")
-        //       }
-        // });
-
     } catch (error) {
         console.log(error);
         res.send({error});
@@ -40,9 +27,10 @@ exports.createUser = async (req, res) => { //Controller must include return stat
     }
 };
 
-// exports.tokenLogin = (req,res)=>{
-//     req.send({user: req.user});
-// }
+exports.tokenLogin = async (req,res)=>{
+    const token = await jwt.sign({id: req.user._id}, process.env.SECRET);
+    res.send({user: req.user, token});
+}
 //create a token which is sent back in the repsonse to stay signed in
 
 
