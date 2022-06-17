@@ -1,9 +1,10 @@
 const User = require("./model");
 const bcrypt = require ("bcryptjs");// for compare pw nested function
-
+const jwt = require("jsonwebtoken");
 
 // create user
 exports.createUser = async (req, res) => { //Controller must include return statement and send a response (res)
+    console.log("create user");
     try {
         // console.log(req, res);
         console.log(req.body.message);
@@ -13,28 +14,35 @@ exports.createUser = async (req, res) => { //Controller must include return stat
             password: req.body.password
         };
         const newUser = await User.create(userObj);
-    
+        
+        //create jwt token
+        const token = await jwt.sign({id: newUser._id}, process.env.SECRET);//sign is a method that creates a token. sign takes 2 arguments: what we want to store in the token (as an object) AND a unique, secret, key 
+        console.log(token);
+        res.send({newUser, token});
+        next();
 
         // compare password with 'test123'
-        const hash = newUser.password;
-        bcrypt.compare("test123", hash, function(err, isMatch) {
-            if (err) {
-                throw err
-              } else if (!isMatch) {
-                console.log("Password doesn't match!")
-              } else {
-                console.log("Password matches!")
-              }
-        });
+        // const hash = newUser.password;
+        // bcrypt.compare("test123", hash, function(err, isMatch) {
+        //     if (err) {
+        //         throw err
+        //       } else if (!isMatch) {
+        //         console.log("Password doesn't match!")
+        //       } else {
+        //         console.log("Password matches!")
+        //       }
+        // });
 
     } catch (error) {
         console.log(error);
-        res.send({
-            error
-        });
+        res.send({error});
+        next();
     }
 };
 
+// exports.tokenLogin = (req,res)=>{
+//     req.send({user: req.user});
+// }
 //create a token which is sent back in the repsonse to stay signed in
 
 
@@ -56,7 +64,7 @@ exports.deleteUser = async (req, res) => {
 }
 
 // find all users
-// exports.findUser = async (req,res)=>{
+// exports.findUsers = async (req,res)=>{
 //     try{
 //         console.log("Find users");
 //         const response = await User.find();
