@@ -1,5 +1,4 @@
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const User = require("../user/model");
 
 exports.hashPassword = async (req,res, next)=>{ //This will go on the create user endpoint
@@ -13,19 +12,30 @@ exports.hashPassword = async (req,res, next)=>{ //This will go on the create use
     }
 };
 
-exports.tokenCheck = async(req,res,next)=>{
-    try {
-        const token = req.header("Authorization");// Targets API header 'authorization
-        console.log(token);
-        const decodedToken = jwt.verify(token, process.env.SECRET);
-        console.log(decodedToken);
-        const user = await User.findById(decodedToken.id);
-        console.log(user);
-        next();
-    } catch (error) {
-        console.log(error);
-        res.send({error: error.code});
-    }
+// compare password with 'test123'
+// const hash = newUser.password;
+// bcrypt.compare("test123", hash, function (err, isMatch) {
+//     if (err) {
+//         throw err
+//     } else if (!isMatch) {
+//         console.log("Password doesn't match!")
+//     } else {
+//         console.log("Password matches!")
+//     }
+// });
 
-}
+// exports.tokenCheck = async(req,res,next)=>{
+//     try {
+//         const token = req.header("Authorization");// Targets API header 'authorization
+//         console.log(token);
+//         const decodedToken = jwt.verify(token, process.env.SECRET);
+//         console.log(decodedToken);
+//         const user = await User.findById(decodedToken.id);
+//         console.log(user);
+//         next();
+//     } catch (error) {
+//         console.log(error);
+//         res.send({error: error.code});
+//     }
+// }
 

@@ -1,6 +1,6 @@
 const User = require("./model");
 const bcrypt = require ("bcryptjs");// for compare pw nested function
-const jwt = require ("jsonwebtoken");
+
 
 // create user
 exports.createUser = async (req, res) => { //Controller must include return statement and send a response (res)
@@ -13,10 +13,7 @@ exports.createUser = async (req, res) => { //Controller must include return stat
             password: req.body.password
         };
         const newUser = await User.create(userObj);
-        const token = await jwt.sign({id: newUser._id}, process.env.SECRET);// JWT: note the underscore '_id'. SECRET - is stored in .env
-        console.log(token);
-        
-        res.send({newUser, token}); //Sends json data. Note the 'token' from jwt
+    
 
         // compare password with 'test123'
         const hash = newUser.password;
@@ -59,7 +56,7 @@ exports.deleteUser = async (req, res) => {
 }
 
 // find all users
-// exports.findUsers = async (req,res)=>{
+// exports.findUser = async (req,res)=>{
 //     try{
 //         console.log("Find users");
 //         const response = await User.find();
@@ -74,8 +71,8 @@ exports.deleteUser = async (req, res) => {
 exports.findUser = async (req, res)=>{
     try {
         const userObj = {
-            // username: req.params.username,
-            username: req.body.username,// BODy gives away
+            username: req.params.username
+            // username: req.body.username,// BODy gives away
         };
         console.log("Find single user", userObj);
         const response = await User.findOne(userObj);
@@ -92,7 +89,7 @@ exports.updateUser = async (req, res) => {
     try {
         const userObj = {
             username: req.body.username,
-            newusername: req.body.newusername 
+            newusername: req.body.newusername
         };
         console.log("update single user", userObj);
         let response = await User.findOneAndUpdate({
