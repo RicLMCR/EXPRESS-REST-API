@@ -18,7 +18,7 @@ exports.createUser = async (req, res) => { //Controller must include return stat
         //create jwt token
         const token = await jwt.sign({id: newUser._id}, process.env.SECRET);//sign is a method that creates a token. sign takes 2 arguments: what we want to store in the token (as an object) AND a unique, secret, key 
         console.log(token);
-        res.send({newUser, token});
+        res.status(201).json({newUser, token});//confirm this thing has been done
         next();
     } catch (error) {
         console.log(error);
