@@ -3,7 +3,7 @@ const bcrypt = require ("bcryptjs");// for compare pw nested function
 const jwt = require("jsonwebtoken");
 
 // create user
-exports.createUser = async (req, res) => { //Controller must include return statement and send a response (res)
+exports.createUser = async (req, res, next) => { //Controller must include return statement and send a response (res)
     console.log("create user");
     try {
         // console.log(req, res);
@@ -122,3 +122,8 @@ exports.updateUser = async (req, res) => {
 //         res.send(error);
 //     }
 // }
+
+//TBC - checking user exists - similar to find user
+exports.checkUserExists = async (req,res,next)=>{
+    next();
+}

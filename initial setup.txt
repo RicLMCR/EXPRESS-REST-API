@@ -95,3 +95,4 @@ create user request
     "email": "ricl@email.com",
     "password": "test123"
 }
+/Targets the token within the aut header and gives it top me

@@ -11,7 +11,8 @@ const {hashPassword, unHash, tokenCheck} = require("../middleware");//import enc
 //     next();
 // };
 
-userRouter.post("/", hashPassword, createUser);//notice there is no parenthisis at end of createUser - worls same as putting function in anonymous function
+//add 'checkUserExists'
+userRouter.post("/user", checkUserExists, hashPassword, createUser);//notice there is no parenthisis at end of createUser - worls same as putting function in anonymous function
 // userRouter.post("/login", unHash, tokenLogin);
 userRouter.delete("/:username",deleteUser);
 userRouter.get("/:username", findUser);//GET requests as params - put in the search bar. Meaning objects will always be returned unless you use the params. The colon - : plus name declaration = key within an object. The name provided needs to match the property you are filtering
