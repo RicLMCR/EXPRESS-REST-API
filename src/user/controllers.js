@@ -1,13 +1,13 @@
 const User = require("./model");
 const bcrypt = require ("bcryptjs");// for compare pw nested function
 const jwt = require("jsonwebtoken");
+const { findOne } = require("./model");
 
 // create user
 exports.createUser = async (req, res, next) => { //Controller must include return statement and send a response (res)
     console.log("create user");
     try {
         // console.log(req, res);
-        console.log(req.body.message);
         const userObj = {
             username: req.body.username,
             email: req.body.email,
@@ -19,18 +19,18 @@ exports.createUser = async (req, res, next) => { //Controller must include retur
         const token = await jwt.sign({id: newUser._id}, process.env.SECRET);//sign is a method that creates a token. sign takes 2 arguments: what we want to store in the token (as an object) AND a unique, secret, key 
         console.log(token);
         res.status(201).json({newUser, token});//confirm this thing has been done
-        next();
+
     } catch (error) {
         console.log(error);
         res.send({error});
-        next();
+
     }
 };
 
 exports.tokenLogin = async (req,res)=>{
+    console.log(req.user);
     const token = await jwt.sign({id: req.user._id}, process.env.SECRET);
-    res.send({user: req.user, token});
-}
+    res.send({user: req.user, token});}
 //create a token which is sent back in the repsonse to stay signed in
 
 

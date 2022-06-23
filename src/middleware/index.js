@@ -16,9 +16,11 @@ exports.hashPassword = async (req,res, next)=>{ //This will go on the create use
 
 //decrypt hash password and compare
 exports.unHash = async (req,res,next)=>{
+    console.log("hello!1111", req.body);
     try {
         req.user = await User.findOne({username: req.body.username});
         const result = await bcrypt.compare(req.body.password, req.user.password);
+        console.log(result);
         if (result){
             next();
         } else {
