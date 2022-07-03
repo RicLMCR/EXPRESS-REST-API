@@ -85,7 +85,6 @@ $ touch src/user/model.js src/user/controllers.js src/user/routes.js
 //password hash library
 $ npm i bcryptjs
 
-
 //json web token (stay signed in)
 $ npm i jsonwebtoken
 

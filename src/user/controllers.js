@@ -41,11 +41,10 @@ exports.deleteUser = async (req, res) => {
         const userObj = {
             username: req.params.username,
         };
-        console.log("deleteUser start hit");
         const delUser = await User.deleteOne(userObj);
-        console.log("delUser hit");
+        // console.log("delUser hit");
+        console.log("111", delUser);
         res.send(delUser);
-        console.log("delUser hit", delUser);
     } catch (error) {
         console.log(error);
     }
